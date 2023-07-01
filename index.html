@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Text-to-Voice Converter</title>
+  <style>
+    #text-input {
+      width: 300px;
+    }
+    #convert-button {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Text-to-Voice Converter</h1>
+  <textarea id="text-input" rows="5" placeholder="Enter text to convert"></textarea>
+  <button id="convert-button">Convert</button>
+
+  <script>
+    const convertButton = document.getElementById('convert-button');
+    convertButton.addEventListener('click', () => {
+      const text = document.getElementById('text-input').value;
+      speakText(text);
+    });
+
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        const speechSynthesis = window.speechSynthesis;
+        const speechUtterance = new SpeechSynthesisUtterance(text);
+
+        speechSynthesis.speak(speechUtterance);
+      } else {
+        console.log('Text-to-speech is not supported in this browser.');
+      }
+    }
+  </script>
+</body>
+</html>
